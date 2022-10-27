@@ -6,9 +6,12 @@ import {
   ShoppingBagIcon,
   UserIcon,
 } from '@heroicons/react/outline';
+import { useSelector } from 'react-redux';
+import { selectBasketItems } from '../redux/basketSlice';
 
 const Header = () => {
   const session = false;
+  const items = useSelector(selectBasketItems);
   return (
     /* For SEO optimalization we use the right semantics in this case header.
     layout=fill is the same as position absolute */
@@ -34,9 +37,11 @@ const Header = () => {
         <SearchIcon className='headerIcon' />
         <Link href='/checkout'>
           <div className='relative cursor-pointer'>
-            <span className='gradient absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full text-white'>
-              5
-            </span>
+            {items.length > 0 && (
+              <span className='gradient absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full text-[10px] text-white'>
+                {items.length}
+              </span>
+            )}
             <ShoppingBagIcon className='headerIcon' />
           </div>
         </Link>
