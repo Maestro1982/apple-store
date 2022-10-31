@@ -8,9 +8,10 @@ import {
 } from '@heroicons/react/outline';
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '../redux/basketSlice';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const Header = () => {
-  const session = false;
+  const { data: session } = useSession();
   const items = useSelector(selectBasketItems);
   return (
     /* For SEO optimalization we use the right semantics in this case header.
@@ -47,14 +48,15 @@ const Header = () => {
         </Link>
         {session ? (
           <Image
-            src=''
+            src={session.user?.image || ''}
             alt='Avatar'
             className='cursor-pointer rounded-full'
             width={34}
             height={34}
+            onClick={() => signOut()}
           />
         ) : (
-          <UserIcon className='headerIcon' />
+          <UserIcon className='headerIcon' onClick={() => signIn()} />
         )}
       </div>
     </header>

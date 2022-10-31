@@ -14,6 +14,7 @@ import Currency from 'react-currency-formatter';
 import Button from '../components/Button';
 import { GetServerSideProps } from 'next';
 import { fetchLineItems } from '../utils/fetchLineItems';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   products: StripeProduct[];
@@ -28,6 +29,7 @@ const Success = ({ products }: Props) => {
     (acc, product) => acc + product.price.unit_amount / 100,
     0
   );
+  const { data: session } = useSession();
 
   useEffect(() => {
     setIsMounted(true);
@@ -79,7 +81,7 @@ const Success = ({ products }: Props) => {
               </p>
               <h4 className='text-lg'>
                 Thank you{' '}
-                {/* {session ? session.user?.name?.split(' ')[0] : 'Guest'} */}
+                {session ? session.user?.name?.split(' ')[0] : 'Guest'}
               </h4>
             </div>
           </div>
@@ -182,7 +184,9 @@ const Success = ({ products }: Props) => {
                   </div>
                   <div className='flex justify-between text-sm'>
                     <p className='text-[gray]'>Discount</p>
-                    <p className='text-[gray]'></p>
+                    <p className='text-[gray]'>
+                      <Currency quantity={0} currency='EUR' />
+                    </p>
                   </div>
                   <div className='flex justify-between text-sm'>
                     <p className='text-[gray]'>Shipping</p>
