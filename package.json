@@ -11,13 +11,16 @@
     "@portabletext/react": "^1.0.6",
     "@reduxjs/toolkit": "^1.8.6",
     "@sanity/image-url": "^1.0.1",
+    "@stripe/stripe-js": "^1.42.0",
     "next": "latest",
     "next-sanity": "^1.0.0",
     "react": "18.1.0",
     "react-currency-formatter": "^1.1.0",
     "react-dom": "18.1.0",
     "react-hot-toast": "^2.4.0",
-    "react-redux": "^8.0.4"
+    "react-redux": "^8.0.4",
+    "react-responsive": "^9.0.0",
+    "stripe": "^10.15.0"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
